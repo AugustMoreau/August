@@ -1,13 +1,13 @@
 #!/bin/bash
 
-# Text colors
+# Text colors for output messages
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
 BLUE='\033[0;34m'
 PURPLE='\033[0;35m'
 CYAN='\033[0;36m'
-NC='\033[0m' 
+NC='\033[0m' # No Color
 
 # Check if curl is installed, and install it if not
 if ! command -v curl &> /dev/null; then
@@ -35,7 +35,7 @@ if (( $(echo "$UBUNTU_VERSION < $REQUIRED_VERSION" | bc -l) )); then
     exit 1
 fi
 
-# Menu
+# Menu for selecting actions
 echo -e "${YELLOW}Select an action:${NC}"
 echo -e "${CYAN}1) Install the node${NC}"
 echo -e "${CYAN}2) Check logs${NC}"
@@ -77,6 +77,9 @@ case $choice in
 
         # Navigate to the folder
         cd target/x86_64-unknown-linux-gnu/release/ || { echo -e "${RED}Directory not found. Check the extracted files.${NC}"; exit 1; }
+
+        # Make the binary executable
+        chmod +x blockmesh-cli
 
         # Request user input
         echo -e "${YELLOW}Enter your email for BlockMesh:${NC} "
@@ -162,6 +165,9 @@ EOT"
         # Navigate to the folder
         cd target/x86_64-unknown-linux-gnu/release/ || { echo -e "${RED}Directory not found. Check the extracted files.${NC}"; exit 1; }
 
+        # Make the binary executable
+        chmod +x blockmesh-cli
+
         # Request user input to update variables
         echo -e "${YELLOW}Enter your email for BlockMesh:${NC} "
         read EMAIL
@@ -210,6 +216,9 @@ EOT"
 
         # Navigate to the folder
         cd target/x86_64-unknown-linux-gnu/release/ || { echo -e "${RED}Directory not found. Check the folder path.${NC}"; exit 1; }
+
+        # Make the binary executable
+        chmod +x blockmesh-cli
 
         # Request user input
         echo -e "${YELLOW}Enter your email for BlockMesh:${NC} "
